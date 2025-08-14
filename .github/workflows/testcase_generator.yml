@@ -1,0 +1,39 @@
+name: Auto Test Case Generator and Executor
+
+on:
+  push:
+    paths:
+      - 'SRS_*.docx'
+
+jobs:
+  generate-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Generate Test Cases
+      run: |
+        python generate_testcases.py SRS_1.docx
+
+    - name: Run Tests
+      run: |
+        python run_tests.py
+
+    - name: Commit and Push Results
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git add generated_testcases.csv test_results.csv
+        git commit -m "Add test results for SRS_1.docx"
+        git push
