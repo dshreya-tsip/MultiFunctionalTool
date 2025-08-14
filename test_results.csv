@@ -1,0 +1,6 @@
+Test Case ID,Description,Input,Expected Output,Test Type,Result
+TC001,Verify application launch,Double-click application icon,Application launches successfully,Functional,Pass
+TC002,Check protocol configuration window,Open protocol configuration,Protocol values are displayed,Functional,Pass
+TC003,Verify debug log collection,Click Run button,Logs are copied to shared folder,Functional,Fail
+TC004,Check memory leak comparison table,Run memory leak check,Comparison table is displayed,Functional,Pass
+TC005,Verify application compatibility on desktop,Run app on desktop,App runs without errors,Non-Functional,Fail
