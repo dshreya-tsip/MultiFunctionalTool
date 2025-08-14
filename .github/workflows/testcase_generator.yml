@@ -31,9 +31,12 @@ jobs:
         python run_tests.py
 
     - name: Commit and Push Results
+      env:
+        TOKEN: ${{ secrets.GH_PAT }}
       run: |
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
+        git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}
         git add generated_testcases.csv test_results.csv
         git commit -m "Add test results for SRS_1.docx"
         git push
